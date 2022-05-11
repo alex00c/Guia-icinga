@@ -1,6 +1,6 @@
 # Guia-icinga
 
-emoji :ner_face:
+emoji :nerd_face:.
 
 Enlace a [Google](https://www.sport.es)
 

@@ -1,10 +1,12 @@
-# Guia-icinga
+# Guia para la instalación y el uso de icinga en Ubuntu
 
-emoji :nerd_face:.
+## Instalacion en Ubuntu 20.4
 
-Enlace a [Google](https://www.sport.es)
+Icinga monitorea y asegura la eficacia de tu infraestructura, te da acceso a datos relevantes y genera alertas para mantenerte informado
 
-![Enano](/img/repositorio.jpg)
+Enlace a [Web Oficial de Icinga](https://www.icinga.com)
 
-Enlace a la [documentacion](docs.md)
+![Ejemplo](/img/ejemploicinga.png)
+
+Enlace a la [Guia de instalación](docs.md)
 

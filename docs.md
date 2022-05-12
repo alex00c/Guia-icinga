@@ -30,6 +30,8 @@ Podemos realizar un checkeo de la instalación mediante el comando de validació
 icinga2 daemon -C
 ```
 Deberia arrojarnos algo asi
+
+
 ![Ejemplo](/img/confirmacion.jpg)
 
 ## Instalamos los plugins

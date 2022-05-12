@@ -56,6 +56,7 @@ apt-get install icinga2-ido-mysql
 Aqui nos pedirá dos pasos de configuracion que son los siguientes
 ![Ejemplo](/img/paso1ido.jpg)
 ![Ejemplo](/img/paso2ido.jpg)
+
 Para acabar nos piden la contraseña que queramos poner
 
 **Configurar la base de datos MySQL**

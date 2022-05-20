@@ -81,7 +81,7 @@ Module 'ido-mysql' was enabled.
 Make sure to restart Icinga 2 for these changes to take effect.
 
 ```
-Reiniciamos el servicio
+**Reiniciamos el servicio**
 ```bash
 systemctl restart icinga2
 
@@ -126,4 +126,14 @@ Done.
 
 Now restart your Icinga 2 daemon to finish the installation!
 ```
+## Por parte de otra maquina , en este caso linux tendremos que instalar tambien icinga para monitorizarlo a distancia ##
 
+Descargamos icinga2 y realizamos el siguiente comando 
+
+
+```bash
+apt-get install mariadb-server mariadb-client
+
+mysql_secure_installation
+
+```

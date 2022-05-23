@@ -69,7 +69,8 @@ Para acabar nos piden la contraseña que queramos poner
 # mysql -u root -p
 
 CREATE DATABASE icinga;
-GRANT SELECT, INSERT, UPDATE, DELETE, DROP, CREATE VIEW, INDEX, EXECUTE ON icinga.* TO 'icinga'@'localhost' IDENTIFIED BY 'icinga';
+GRANT ALL ON icinga.* TO 'icinga'@'localhost' IDENTIFIED BY 'icinga';
+FLUSH PRIVILEGES;
 quit
 
 ```
@@ -81,13 +82,16 @@ Module 'ido-mysql' was enabled.
 Make sure to restart Icinga 2 for these changes to take effect.
 
 ```
+Nuestro archivo de configuración debe ser algo asi
+
+![Ejemplo](/img/nano.jpg)
 **Reiniciamos el servicio**
 ```bash
 systemctl restart icinga2
 
 ```
 
-## Hemos de usar el node wizard que viene con el deb nodejs ##
+## Para monitorizar otros equipos hemos de configurar un master  ##
 
 ```bash
 apt-get install nodejs
@@ -125,15 +129,31 @@ Checking if the api-users.conf file exists...
 Done.
 
 Now restart your Icinga 2 daemon to finish the installation!
+
+sudo systemctl restart icinga2
 ```
-## Por parte de otra maquina , en este caso linux tendremos que instalar tambien icinga para monitorizarlo a distancia ##
+## Usaremos CSR Auto-Singing ##
 
-Descargamos icinga2 y realizamos el siguiente comando 
-
+Para ello hemos de poder generar un ticket asique nos dirigimos al siguiente archivo y escribimos :
 
 ```bash
-apt-get install mariadb-server mariadb-client
+[root@icinga2-master1.localdomain /]# nano /etc/icinga2/conf.d/api-users.conf
 
-mysql_secure_installation
+object ApiUser "client-pki-ticket" {
+  password = "bea11beb7b810ea9ce6ea" //Esto lo cambiamos
+  permissions = [ "actions/generate-ticket" ]
+}
+
+# systemctl restart icinga2
+
+Generamos el ticket 
+
+# curl -k -s -u client-pki-ticket:bea11beb7b810ea9ce6ea -H 'Accept: application/json' \
+ -X POST 'https://localhost:5665/v1/actions/generate-ticket' -d '{ "cn": "icinga2-agent1.localdomain" }'
+ También podemos usar 
+# icinga2 pki ticket --cn icinga2-agent1.localdomain
 
 ```
+Este lo guardamos para nuestro agente
+
+Enlace a la [Guia Para el agente/cliente](/agente.md)

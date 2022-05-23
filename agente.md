@@ -4,7 +4,7 @@ Hemos de tener instalados icinga2 , icingaweb2 y nodejs para llevar a cabo la gu
 
 ## Tenemos que configurar nuestro agente para poder conectarlo ##
 
-´´´bash
+```bash
 icinga2 node wizard
 Welcome to the Icinga 2 Setup Wizard!
 
@@ -33,14 +33,14 @@ Is this information correct? [y/N]: y
 Please specify the request ticket generated on your Icinga 2 master (optional).
  (Hint: # icinga2 pki ticket --cn 'icinga2-agent1.localdomain'):
 e3f6fccfb9c0f35ac89710b6251f30abb3cc1120
-´´´
+```
 Si teneis el siguiente fallo :
-´´´bash
+```bash
 critical/Application: Error: boost::filesystem::copy_file: Permission denied: "/etc/icinga2/features-available/api.conf", "/etc/icinga2/features-available/api.conf.orig"
-´´´
+```
 Tendreis que conceder los siguientes permisos:
 
-´´´bash
+```bash
 root@idp:/home/alumno# chown -R :nagios /etc/icinga2/conf.d/
 root@idp:/home/alumno# chmod 775 /etc/icinga2/conf.d/
 root@idp:/home/alumno# chmod 664 /etc/icinga2/conf.d/*
@@ -49,7 +49,7 @@ root@idp:/home/alumno# chmod 775 /etc/icinga2/features-available
 root@idp:/home/alumno# chmod 664 /etc/icinga2/features-available/*
 root@idp:/home/alumno# systemctl restart  icinga2
 root@idp:/home/alumno# systemctl status icinga2
-´´´
+```
 ** Ahora tendremos que ir a la configuracion de los nodos **
 
 Enlace a la [Guia Para Configurar los Nodos](/nodos.md)

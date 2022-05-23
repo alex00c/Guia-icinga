@@ -9,11 +9,34 @@ Se debería de ver algo asi
 
 Despues deberemos validar la configuracion y reiniciar icinga2 en los dos equipos
 
-´´´bash
+```bash
 [root@icinga2-agent1.localdomain /]# icinga2 daemon -C
 [root@icinga2-agent1.localdomain /]# systemctl restart icinga2
 
 [root@icinga2-master1.localdomain /]# icinga2 daemon -C
 [root@icinga2-master1.localdomain /]# systemctl restart icinga2
-´´´
+```
 Cuando esten conectados podemos pasar a monitorear remotamente el agente
+
+En el agente o equipo cliente deberemos crear un usuario API
+```bash
+icinga2 api setup
+
+nano /etc/icinga2/conf.d/api-users.conf
+
+Y añadimos lo siguiente
+
+object ApiUser "icingaweb2" {
+  password = "bea11beb7b810ea9ce6ea" 
+  permissions = [ "status/query", "actions/*", "objects/modify/*", "objects/query/*" ]
+}
+
+Guardamos y :
+
+systemctl restart icinga2
+```
+Al completar esto y abrir incigaweb2 en nuestro master nos deberia aprecer algo asi. Y ya podriamos monitorizar , activar notificaciones y demas.
+
+
+![Ejemplo](/img/final.jpg)
+

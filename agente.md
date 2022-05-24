@@ -1,3 +1,68 @@
+## Para monitorizar otros equipos hemos de configurar un master  ##
+
+```bash
+apt-get install nodejs
+
+icinga2 node wizard
+
+Welcome to the Icinga 2 Setup Wizard!
+
+We will guide you through all required configuration details.
+
+Please specify if this is a satellite/agent setup ('n' installs a master setup) [Y/n]: n
+
+Starting the Master setup routine...
+
+Please specify the common name (CN) [icinga2-master1.localdomain]: icinga2-master1.localdomain
+Reconfiguring Icinga...
+Checking for existing certificates for common name 'icinga2-master1.localdomain'...
+Certificates not yet generated. Running 'api setup' now.
+Generating master configuration for Icinga 2.
+Enabling feature api. Make sure to restart Icinga 2 for these changes to take effect.
+
+Master zone name [master]:
+
+Default global zones: global-templates director-global
+Do you want to specify additional global zones? [y/N]: N
+
+Please specify the API bind host/port (optional):
+Bind Host []:
+Bind Port []:
+
+Do you want to disable the inclusion of the conf.d directory [Y/n]:
+Disabling the inclusion of the conf.d directory...
+Checking if the api-users.conf file exists...
+
+Done.
+
+Now restart your Icinga 2 daemon to finish the installation!
+
+sudo systemctl restart icinga2
+```
+## Usaremos CSR Auto-Singing ##
+
+Para ello hemos de poder generar un ticket asique nos dirigimos al siguiente archivo y escribimos :
+
+```bash
+[root@icinga2-master1.localdomain /]# nano /etc/icinga2/conf.d/api-users.conf
+
+object ApiUser "client-pki-ticket" {
+  password = "bea11beb7b810ea9ce6ea" //Esto lo cambiamos
+  permissions = [ "actions/generate-ticket" ]
+}
+
+# systemctl restart icinga2
+
+Generamos el ticket 
+
+# curl -k -s -u client-pki-ticket:bea11beb7b810ea9ce6ea -H 'Accept: application/json' \
+ -X POST 'https://localhost:5665/v1/actions/generate-ticket' -d '{ "cn": "icinga2-agent1.localdomain" }'
+ También podemos usar 
+# icinga2 pki ticket --cn icinga2-agent1.localdomain
+
+```
+Este lo guardamos para nuestro agente
+
 # Aqui veremos como configurar el agente para su monitorización #
 
 Hemos de tener instalados icinga2 , icingaweb2 y nodejs para llevar a cabo la guia , en los pasos del host se puede visualizar como hacerlo

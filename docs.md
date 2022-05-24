@@ -85,75 +85,113 @@ Make sure to restart Icinga 2 for these changes to take effect.
 Nuestro archivo de configuración debe ser algo asi
 
 ![Ejemplo](/img/nano.jpg)
+
 **Reiniciamos el servicio**
+
 ```bash
 systemctl restart icinga2
 
 ```
 
-## Para monitorizar otros equipos hemos de configurar un master  ##
+## Instalamos los siguiente paquetes que son necesarios para abrir icingaweb2 en nustro navegador ##
+
+**Apache2** 
 
 ```bash
-apt-get install nodejs
+sudo apt install apache2 -y
 
-icinga2 node wizard
+sudo systemctl start apache2
 
-Welcome to the Icinga 2 Setup Wizard!
+sudo systemctl enable apache2
 
-We will guide you through all required configuration details.
-
-Please specify if this is a satellite/agent setup ('n' installs a master setup) [Y/n]: n
-
-Starting the Master setup routine...
-
-Please specify the common name (CN) [icinga2-master1.localdomain]: icinga2-master1.localdomain
-Reconfiguring Icinga...
-Checking for existing certificates for common name 'icinga2-master1.localdomain'...
-Certificates not yet generated. Running 'api setup' now.
-Generating master configuration for Icinga 2.
-Enabling feature api. Make sure to restart Icinga 2 for these changes to take effect.
-
-Master zone name [master]:
-
-Default global zones: global-templates director-global
-Do you want to specify additional global zones? [y/N]: N
-
-Please specify the API bind host/port (optional):
-Bind Host []:
-Bind Port []:
-
-Do you want to disable the inclusion of the conf.d directory [Y/n]:
-Disabling the inclusion of the conf.d directory...
-Checking if the api-users.conf file exists...
-
-Done.
-
-Now restart your Icinga 2 daemon to finish the installation!
-
-sudo systemctl restart icinga2
+sudo apt install php php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip php-cli php-mysql php8.0-common php8.0-opcache php-gmp php-imagick -y
 ```
-## Usaremos CSR Auto-Singing ##
-
-Para ello hemos de poder generar un ticket asique nos dirigimos al siguiente archivo y escribimos :
+Tenemos que modificar el siguiente archivo
 
 ```bash
-[root@icinga2-master1.localdomain /]# nano /etc/icinga2/conf.d/api-users.conf
+sudo nano /etc/php/8.0/apache2/php.ini
+```
+Añadiendo la siguiente linea :
 
-object ApiUser "client-pki-ticket" {
-  password = "bea11beb7b810ea9ce6ea" //Esto lo cambiamos
-  permissions = [ "actions/generate-ticket" ]
-}
+```bash
+cgi.fix_pathinfo=0
+```
 
-# systemctl restart icinga2
 
-Generamos el ticket 
+**PHP**
 
-# curl -k -s -u client-pki-ticket:bea11beb7b810ea9ce6ea -H 'Accept: application/json' \
- -X POST 'https://localhost:5665/v1/actions/generate-ticket' -d '{ "cn": "icinga2-agent1.localdomain" }'
- También podemos usar 
-# icinga2 pki ticket --cn icinga2-agent1.localdomain
+```bash
+sudo apt install software-properties-common
+
+sudo add-apt-repository ppa:ondrej/php
 
 ```
-Este lo guardamos para nuestro agente
 
-Enlace a la [Guia Para el agente/cliente](/agente.md)
+**Instalar Icingaweb2**
+
+```bash
+sudo apt install icingaweb2 icingacli libapache2-mod-php -y
+
+sudo mysql -u root -p
+
+CREATE DATABASE icinga2web;
+GRANT ALL ON icinga2web.* TO 'icinga2web'@'localhost' IDENTIFIED BY 'contraseña';
+FLUSH PRIVILEGES;
+EXIT
+
+sudo icingacli setup token create
+```
+El token lo copiaremos en algún documento para usarlo posteriormente
+
+## Configuración del Icinga Web 2 en el navegador ##
+
+Abrimos nuestro navegador y en el buscador introducimos lo siguiente
+
+```bash
+http://tu_direccion_IP/icingaweb2/setup
+```
+
+Y seguimos los siguientes pasos pulsando siguiente en las paginas que no se muestren :
+
+
+![Ejemplo](/img/icingaweb.jpg)
+
+
+
+![Ejemplo](/img/icingawebdatos.jpg)
+
+
+
+![Ejemplo](/img/datosusuariosicinga.jpg)
+
+
+
+
+![Ejemplo](/img/banked%20name.jpg)
+
+
+
+![Ejemplo](/img/admin.jpg)
+
+
+![Ejemplo](/img/configuraricinga.jpg)
+
+
+![Ejemplo](/img/commandicingaweb.jpg)
+
+
+
+![Ejemplo](/img/securityicinga.jpg)
+
+
+![Ejemplo](/img/finalicingaweb.jpg)
+
+
+
+![Ejemplo](/img/conexionwindows.jpg)
+
+
+**Y ya habriamos terminado y podremos monitorizar todo nuestro equipo**
+
+
+Enlace a la [Guia Para el Monitorizaramiento otros equipos](/agente.md)

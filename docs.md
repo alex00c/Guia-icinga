@@ -1,8 +1,15 @@
 # Documentación
-Icinga es un sistema de monitorización opensource, que controla cualquier recurso de la red, notifica al usuario los errores, genera datos de rendimiento para la presentación de informes e informa del estado de los recursos. Es escalable y extensible, Icinga puede controlar entornos complejos y grandes a través de lugares dispersos.
-## Introducción 
 
-Vamos a instalar y usar icinga en una maquina virtual para mostrar como hacerlo
+
+![icinga](/img/icinga.png)
+
+
+**Icinga es un sistema de monitorización opensource, que controla cualquier recurso de la red, notifica al usuario los errores, genera datos de rendimiento para la presentación de informes e informa del estado de los recursos. Es escalable y extensible, Icinga puede controlar entornos complejos y grandes a través de lugares dispersos.**
+
+
+# Introducción 
+
+**Vamos a instalar y usar icinga en una maquina virtual para mostrar como hacerlo**
 
 ## Descarga de Icinga
 

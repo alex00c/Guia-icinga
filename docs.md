@@ -9,9 +9,12 @@ Vamos a instalar y usar icinga en una maquina virtual para mostrar como hacerlo
 Para descargar icinga tenemos que añadir el siguiente repositorio
 
 ```bash
-apt-get update
-apt-get -y install apt-transport-https wget gnupg
-
+sudo apt-get update
+```
+```bash
+sudo apt-get -y install apt-transport-https wget gnupg
+```
+```bash
 wget -O - https://packages.icinga.com/icinga.key | apt-key add -
 
 . /etc/os-release; if [ ! -z ${UBUNTU_CODENAME+x} ]; then DIST="${UBUNTU_CODENAME}"; else DIST="$(lsb_release -c| awk '{print $2}')"; fi; \
@@ -19,8 +22,9 @@ wget -O - https://packages.icinga.com/icinga.key | apt-key add -
  /etc/apt/sources.list.d/${DIST}-icinga.list
  echo "deb-src https://packages.icinga.com/ubuntu icinga-${DIST} main" >> \
  /etc/apt/sources.list.d/${DIST}-icinga.list
-
-apt-get update
+```
+```bash
+sudo apt-get update
 ```
 ```bash
 apt-get install icinga2
@@ -93,17 +97,20 @@ systemctl restart icinga2
 
 ```
 
-## Instalamos los siguiente paquetes que son necesarios para abrir icingaweb2 en nustro navegador ##
+## Instalamos los siguiente paquetes que son necesarios para abrir icingaweb2 en nuestro navegador ##
 
 **Apache2** 
 
 ```bash
 sudo apt install apache2 -y
-
+```
+```bash
 sudo systemctl start apache2
-
+```
+```bash
 sudo systemctl enable apache2
-
+```
+```bash
 sudo apt install php php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip php-cli php-mysql php8.0-common php8.0-opcache php-gmp php-imagick -y
 ```
 Tenemos que modificar el siguiente archivo
@@ -111,7 +118,7 @@ Tenemos que modificar el siguiente archivo
 ```bash
 sudo nano /etc/php/8.0/apache2/php.ini
 ```
-Añadiendo la siguiente linea :
+Cambiando el siguiente parámetro :
 
 ```bash
 cgi.fix_pathinfo=0
@@ -131,14 +138,16 @@ sudo add-apt-repository ppa:ondrej/php
 
 ```bash
 sudo apt install icingaweb2 icingacli libapache2-mod-php -y
-
+```
+```bash
 sudo mysql -u root -p
 
 CREATE DATABASE icinga2web;
 GRANT ALL ON icinga2web.* TO 'icinga2web'@'localhost' IDENTIFIED BY 'contraseña';
 FLUSH PRIVILEGES;
 EXIT
-
+```
+```bash
 sudo icingacli setup token create
 ```
 El token lo copiaremos en algún documento para usarlo posteriormente
@@ -151,7 +160,8 @@ Abrimos nuestro navegador y en el buscador introducimos lo siguiente
 http://tu_direccion_IP/icingaweb2/setup
 ```
 
-Y seguimos los siguientes pasos pulsando siguiente en las paginas que no se muestren :
+
+**Y seguimos los siguientes pasos pulsando siguiente en las paginas que no se muestren :**
 
 
 ![Ejemplo](/img/icingaweb.jpg)
@@ -190,8 +200,12 @@ Y seguimos los siguientes pasos pulsando siguiente en las paginas que no se mues
 
 ![Ejemplo](/img/conexionwindows.jpg)
 
+![Ejemplo](/img/servicios.jpg)
 
 **Y ya habriamos terminado y podremos monitorizar todo nuestro equipo**
 
 
-Enlace a la [Guia Para el Monitorizaramiento otros equipos](/agente.md)
+Enlace a la [Guia Para la monitorización de otros equipos](/agente.md)
+
+
+Enlace a la [Guia Para añadir servicios de red a monitorizar](/servicios.md)

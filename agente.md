@@ -44,7 +44,7 @@ object Service "CPU" {
 ```
 
 ```bash
-object Service "Disco" {
+object Service "Almacenamiento" {
   import "generic-service"
   host_name = "Icinga-cliente"
   check_command = "disk"

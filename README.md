@@ -19,3 +19,10 @@ Enlace a [Web Oficial de Icinga](https://www.icinga.com)
 Enlace a la [Guia de instalación](docs.md)
 
 
+Enlace a la [Guia Para la monitorización de otros equipos](/agente.md)
+
+
+Enlace a la [Guia Para añadir servicios de red a monitorizar](/servicios.md)
+
+Enlace a la [Guia Para Monitorizar sitio web](/cpu.md)
+

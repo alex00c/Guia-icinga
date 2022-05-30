@@ -63,3 +63,8 @@ object Service "http" {
 Se tendriá que ver de la siguiente manera
 
 ![Ejemplo](/img/redcliente.jpg)
+
+
+Enlace a la [Guia Para la monitorización de otros equipos](/agente.md)
+
+Enlace a la [Guia Para Monitorizar sitio web](/cpu.md)

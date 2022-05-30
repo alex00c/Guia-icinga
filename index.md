@@ -1,37 +1,28 @@
-## Welcome to GitHub Pages
+# Guia para la instalación y el uso de icinga en Ubuntu
+![Ejemplo](/img/ubuntu.png)
+## Instalacion en Ubuntu 20.4
 
-You can use the [editor on GitHub](https://github.com/alex00c/Guia-icinga/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Icinga monitorea y asegura la eficacia de tu infraestructura, te da acceso a datos relevantes y genera alertas para mantenerte informado
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Características principales:
 
-### Markdown
+-Monitorización de servicios de red (SMTP, POP3, HTTP, -NTP, ping, etcétera)
+-Monitorización de componentes de red (switches, -routers, etcétera)
+-Notificación a usuarios por correo electrónico
+-Nivel de alertas
+-Dos interfaces web opciones (Icinga Clasic UI e Icinga Web)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Enlace a [Web Oficial de Icinga](https://www.icinga.com)
 
-```markdown
-Syntax highlighted code block
+![Ejemplo](/img/ejemploicinga.png)
 
-# Header 1
-## Header 2
-### Header 3
+Enlace a la [Guia de instalación](docs.md)
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+Enlace a la [Guia Para la monitorización de otros equipos](/agente.md)
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
+Enlace a la [Guia Para añadir servicios de red a monitorizar](/servicios.md)
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+Enlace a la [Guia Para Monitorizar sitio web](/cpu.md)
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/alex00c/Guia-icinga/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
